@@ -1,0 +1,9 @@
+/node_modules
+/build
+/.next
+/.idea
+.DS_Store
+.env
+*.log
+*.iml
+*lock.json
