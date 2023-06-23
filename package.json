@@ -1,0 +1,22 @@
+{
+  "name": "international-aid-legion-bot",
+  "version": "0.0.1",
+  "private": true,
+  "author": {
+    "name": "Ivan Novikov 🇺🇦",
+    "username": "illinifellow",
+    "email": "illinifellow@gmail.com",
+    "url": "https://illinifellow.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:illinifellow/international-aid-legion-bot.git"
+  },
+  "scripts": {},
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
