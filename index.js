@@ -50,6 +50,7 @@ const writeGoogleSheets = ({
   icon,
   ...data
 }) => {
+  console.log('WRITE_GOOGLE_SHEETS', data)
   const auth = new google.auth.JWT(
     process.env.GOOGLE_CLIENT_EMAIL,
     null,
@@ -101,6 +102,7 @@ const writeGoogleSheets = ({
 }
 
 bot.onText(/\/start/, ({ from }) => {
+  console.log('START', from)
   bot.sendMessage(from.id, config.start.question[from.language_code], {
     reply_markup: renderOptions(config.start.buttons, from.language_code),
   })
@@ -116,6 +118,7 @@ bot.on(
     },
     data,
   }) => {
+    console.log('QUERY', { from, message, data })
     userState[from.id] = userState[from.id]
       ? {
         ...userState[from.id],
@@ -158,6 +161,7 @@ bot.on(
 )
 
 bot.on('message', ({ from, text, from: { id }, ...rest }) => {
+  console.log('MESSAGE', { from, text, ...rest })
   if (!userState[id]) {
     !text.includes('start') && bot.deleteMessage(rest.chat.id, rest.message_id)
     return
