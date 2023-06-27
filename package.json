@@ -1,5 +1,5 @@
 {
-  "name": "international-aid-legion-bot",
+  "name": "bot.ial.life",
   "version": "0.0.1",
   "private": true,
   "author": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:illinifellow/international-aid-legion-bot.git"
+    "url": "git@github.com:illinifellow/bot.ial.life.git"
   },
   "scripts": {},
   "dependencies": {
