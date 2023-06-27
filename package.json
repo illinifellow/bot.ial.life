@@ -14,9 +14,8 @@
   },
   "scripts": {},
   "dependencies": {
-    "csv-writer": "^1.6.0",
     "dotenv": "^16.3.1",
-    "fs": "^0.0.1-security",
+    "googleapis": "^39.2.0",
     "lodash": "^4.17.21",
     "node-telegram-bot-api": "^0.61.0",
     "nodemon": "^2.0.22"

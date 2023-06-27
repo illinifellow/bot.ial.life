@@ -1,5 +1,6 @@
 require("dotenv").config()
 const _ = require('lodash');
+const { google } = require('googleapis');
 const TelegramBot = require("node-telegram-bot-api");
 const bot = new TelegramBot(process.env.TELE_TOKEN, { polling: true });
 
@@ -67,6 +68,7 @@ const scenarios = {
   "military": {
     "id": "military",
     "icon": "⚔️",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -91,9 +93,9 @@ const scenarios = {
         },
       },
       {
-        "field": "unit",
+        "field": "organization",
         "question": {
-          "en": "What's you unit?",
+          "en": "What's your unit?",
           "uk": "З якої ви ВЧ, бат?"
         },
       },
@@ -146,6 +148,7 @@ const scenarios = {
   "volunteer_provides_help": {
     "id": "volunteer_provides_help",
     "icon": "🚨",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -197,6 +200,7 @@ const scenarios = {
   "volunteer_requests_military_help": {
     "id": "volunteer_requests_military_help",
     "icon": "🚑",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -225,6 +229,7 @@ const scenarios = {
   "volunteer_requests_civilian_help": {
     "id": "volunteer_requests_civilian_help",
     "icon": "🚚",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -260,6 +265,7 @@ const scenarios = {
   "public_figure": {
     "id": "public_figure",
     "icon": "🕺",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -295,6 +301,7 @@ const scenarios = {
   "journalist": {
     "id": "journalist",
     "icon": "📝",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -330,6 +337,7 @@ const scenarios = {
   "anonymous": {
     "id": "anonymous",
     "icon": "🌚",
+    "managers": ['feysk', 'illinifellow'],
     "isFinalSequence": true,
     "questionSequence": [
       {
@@ -371,83 +379,25 @@ const scenarios = {
   },
 }
 
-const messages = {
-  "military": {
-    "en": "Military",
-    "uk": "Військовий"
-  },
-  "volunteer": {
-    "en": "Volunteer",
-    "uk": "Волонтер"
-  },
-  "volunteer_provides_help": {
-    "en": "Volunteer, provides help",
-    "uk": "Волонтер, пропонує допомогу"
-  },
-  "volunteer_requests_help": {
-    "en": "Volunteer, requests help",
-    "uk": "Волонтер, запитує про допомогу"
-  },
-  "volunteer_requests_military_help": {
-    "en": "Volunteer, requests help for military",
-    "uk": "Волонтер, запитує про допомогу для військових"
-  },
-  "volunteer_requests_civilian_help": {
-    "en": "Volunteer, requests help for civilians",
-    "uk": "Волонтер, запитує про допомогу для цивільних"
-  },
-  "public_figure": {
-    "en": "Public figure",
-    "uk": "Громадський діяч"
-  },
-  "journalist": {
-    "en": "Journalist / blogger",
-    "uk": "Журналіст / блогер"
-  },
-  "anonymous": {
-    "en": "Anonymous",
-    "uk": "Анон"
-  },
-  "name": {
-    "en": "Name",
-    "uk": "Ім'я"
-  },
-  "rank": {
-    "en": "Rank",
-    "uk": "Звання"
-  },
-  "location": {
-    "en": "Location",
-    "uk": "Локація"
-  },
-  "unit": {
-    "en": "Unit",
-    "uk": "ВЧ/Бат"
-  },
-  "deadline": {
-    "en": "Deadline",
-    "uk": "Дедлайн"
-  },
-  "priority": {
-    "en": "Priority",
-    "uk": "Пріорітет"
-  },
-  "request": {
-    "en": "Details",
-    "uk": "Суть"
-  },
-  "for": {
-    "en": "For who",
-    "uk": "Для кого"
-  },
-  "contact": {
-    "en": "Contact",
-    "uk": "Контактні дані"
-  },
-  "organization": {
-    "en": "Organization",
-    "uk": "Організація"
-  }
+const dictionary = {
+  "military": "Військовий",
+  "volunteer_provides_help": "Волонтер, пропонує допомогу",
+  "volunteer_requests_military_help": "Волонтер, запитує про допомогу для військових",
+  "volunteer_requests_civilian_help": "Волонтер, запитує про допомогу для цивільних",
+  "public_figure": "Громадський діяч",
+  "journalist": "Журналіст / блогер",
+  "anonymous": "Анон",
+  "name": "Ім'я",
+  "rank": "Звання",
+  "location": "Локація",
+  "deadline": "Дедлайн",
+  "priority": "Пріорітет",
+  "request": "Суть",
+  "for": "Для кого",
+  "contact": "Контактні дані",
+  "organization": "Організація",
+  "username": "Юзернейм",
+  "scenario": "Тип",
 }
 
 const userState = {};
@@ -459,8 +409,55 @@ const renderOptions = (buttons, lang = ['uk', 'en'].includes(lang) ? lang : 'uk'
   })), 2), ...opts
 })
 
-const generateChannelMessage = ({ id, username, first_name, last_name, language_code, scenario, icon, ...data }) => `${icon} ${messages[scenario]['uk']} \\([@${username}](tg://user?id=${id})\\)\n${Object.keys(data).map(key => `${messages[key]['uk']}: ${data[key]}`).join('\n')
-  }`
+const generateChannelMessage = ({ data: { id, username, first_name, last_name, language_code, scenario, icon, ...data } }) => `${icon} ${dictionary[scenario]} \\([@${username}](tg://user?id=${id})\\)\n${Object.keys(data).map(key => `${dictionary[key]}: ${data[key]}`).join('\n')}`
+
+const writeGoogleSheets = ({ id, first_name, last_name, language_code, icon, ...data }) => {
+  const auth = new google.auth.JWT(
+    process.env.GOOGLE_CLIENT_EMAIL,
+    null,
+    process.env.GOOGLE_PRIVATE_KEY,
+    ['https://www.googleapis.com/auth/spreadsheets']
+  );
+  const getColumns = async (gsapi) => {
+    const response = await gsapi.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_TABLE_ID,
+      range: 'A1:Z1'
+    });
+    return response.data.values ? response.data.values[0] : [];
+  }
+  const addColumn = async (gsapi, column) => {
+    const columns = await getColumns(gsapi);
+    columns.push(column);
+    await gsapi.spreadsheets.values.update({
+      spreadsheetId: process.env.GOOGLE_TABLE_ID,
+      range: 'A1:Z1',
+      valueInputOption: 'USER_ENTERED',
+      resource: { values: [columns] }
+    });
+  }
+  const appendData = async (gsapi, data) => {
+    const columns = await getColumns(gsapi);
+    for (let key in data) {
+      if (!columns.includes(dictionary[key])) await addColumn(gsapi, dictionary[key]);
+    }
+    const values = columns.map(column => {
+      const k = Object.keys(dictionary).find(key => dictionary[key] === column);
+      if (k === 'scenario') return `${icon} ${dictionary[data[k]]}`
+      if (k === 'username') return `https://t.me/${data[k]}`
+      return data[k] || '-'
+    });
+    await gsapi.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_TABLE_ID,
+      range: 'A2',
+      valueInputOption: 'USER_ENTERED',
+      resource: { values: [values] }
+    });
+  }
+  auth.authorize(() => {
+    const gsapi = google.sheets({ version: 'v4', auth });
+    appendData(gsapi, data);
+  });
+}
 
 
 bot.onText(/\/start/, ({ from }) => {
@@ -512,7 +509,8 @@ bot.on('message', ({ from, text, from: { id }, ...rest }) => {
 
   if (userState[id]._questionIndex >= scenarios[userState[id].scenario].questionSequence.length) {
     const { _questionIndex, ...data } = userState[id]
-    bot.sendMessage(process.env.TELE_CHANNEL_ID, generateChannelMessage(data), { parse_mode: 'MarkdownV2' });
+    writeGoogleSheets(data)
+    bot.sendMessage(process.env.TELE_CHANNEL_ID, generateChannelMessage({ data }), { parse_mode: 'MarkdownV2' });
     setTimeout(() => {
       bot.sendMessage(from.id, scenarios.success.question[from.language_code], { reply_markup: renderOptions(scenarios.success.buttons, from.language_code) });
     }, 1000)
