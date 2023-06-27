@@ -1,0 +1,20 @@
+{
+  "military": "Військовий",
+  "volunteer_provides_help": "Волонтер, пропонує допомогу",
+  "volunteer_requests_military_help": "Волонтер, запитує про допомогу для військових",
+  "volunteer_requests_civilian_help": "Волонтер, запитує про допомогу для цивільних",
+  "public_figure": "Громадський діяч",
+  "journalist": "Журналіст / блогер",
+  "anonymous": "Анон",
+  "name": "Ім'я",
+  "rank": "Звання",
+  "location": "Локація",
+  "deadline": "Дедлайн",
+  "priority": "Пріорітет",
+  "request": "Суть запиту",
+  "for": "Для кого",
+  "contact": "Контактні дані",
+  "organization": "Організація",
+  "username": "Юзернейм",
+  "scenario": "Тип"
+}

@@ -1,0 +1,367 @@
+{
+  "start": {
+    "id": "start",
+    "question": {
+      "en": "Who are you?",
+      "uk": "Хто ви є?"
+    },
+    "buttons": {
+      "military": {
+        "id": "military",
+        "text": {
+          "en": "Military",
+          "uk": "Військовий"
+        }
+      },
+      "volunteer": {
+        "id": "volunteer",
+        "text": {
+          "en": "Volunteer",
+          "uk": "Волонтер"
+        }
+      },
+      "public_figure": {
+        "id": "public_figure",
+        "text": {
+          "en": "Public figure",
+          "uk": "Громадський діяч"
+        }
+      },
+      "journalist": {
+        "id": "journalist",
+        "text": {
+          "en": "Journalist / blogger",
+          "uk": "Журналіст / блогер"
+        }
+      },
+      "anonymous": {
+        "id": "anonymous",
+        "text": {
+          "en": "Anonymous / other",
+          "uk": "Анон / інше"
+        }
+      }
+    }
+  },
+  "success": {
+    "id": "success",
+    "question": {
+      "en": "THANK YOU!\nWe will contact you very soon!",
+      "uk": "ДЯКУЄМО!\nМи зв'яжемося з вами дуже скоро!"
+    },
+    "buttons": {
+      "start": {
+        "id": "start",
+        "text": {
+          "en": "Add another request",
+          "uk": "Зробити ще запит"
+        }
+      }
+    }
+  },
+  "military": {
+    "id": "military",
+    "icon": "⚔️",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "rank",
+        "question": {
+          "en": "What's your rank?",
+          "uk": "Яке ваше звання?"
+        }
+      },
+      {
+        "field": "location",
+        "question": {
+          "en": "Where are you located?",
+          "uk": "Де ви знаходитесь?"
+        }
+      },
+      {
+        "field": "organization",
+        "question": {
+          "en": "What's your unit?",
+          "uk": "З якої ви ВЧ, бат?"
+        }
+      },
+      {
+        "field": "deadline",
+        "question": {
+          "en": "What's the deadline?",
+          "uk": "Коли дедлайн?"
+        }
+      },
+      {
+        "field": "priority",
+        "question": {
+          "en": "What's the priority?",
+          "uk": "Який пріорітет?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What's your request?",
+          "uk": "Яка потрібна допомога?"
+        }
+      }
+    ]
+  },
+  "volunteer": {
+    "id": "volunteer",
+    "question": {
+      "en": "Are you requesting or providing help?",
+      "uk": "Ви пропонуєте чи просите про допомогу?"
+    },
+    "buttons": {
+      "volunteer_provides_help": {
+        "id": "volunteer_provides_help",
+        "text": {
+          "en": "Providing help",
+          "uk": "Пропоную допомогу"
+        }
+      },
+      "volunteer_requests_help": {
+        "id": "volunteer_requests_help",
+        "text": {
+          "en": "Requesting help",
+          "uk": "Прошу про допомогу"
+        }
+      }
+    }
+  },
+  "volunteer_provides_help": {
+    "id": "volunteer_provides_help",
+    "icon": "🚨",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "location",
+        "question": {
+          "en": "Where are you located?",
+          "uk": "Де ви знаходитесь?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What you provide?",
+          "uk": "Що пропонуєте?"
+        }
+      }
+    ]
+  },
+  "volunteer_requests_help": {
+    "id": "volunteer_requests_help",
+    "question": {
+      "en": "For who you are asking for help for?",
+      "uk": "Для кого ви просите про допомогу?"
+    },
+    "buttons": {
+      "volunteer_requests_military_help": {
+        "id": "volunteer_requests_military_help",
+        "text": {
+          "en": "For military",
+          "uk": "Для військових"
+        }
+      },
+      "volunteer_requests_civilian_help": {
+        "id": "volunteer_requests_civilian_help",
+        "text": {
+          "en": "For civilians",
+          "uk": "Для цивільних"
+        }
+      }
+    }
+  },
+  "volunteer_requests_military_help": {
+    "id": "volunteer_requests_military_help",
+    "icon": "🚑",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "location",
+        "question": {
+          "en": "Where are you located?",
+          "uk": "Де ви знаходитесь?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What's your request?",
+          "uk": "Яка потрібна допомога?"
+        }
+      }
+    ]
+  },
+  "volunteer_requests_civilian_help": {
+    "id": "volunteer_requests_civilian_help",
+    "icon": "🚚",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "location",
+        "question": {
+          "en": "Where are you located?",
+          "uk": "Де ви знаходитесь?"
+        }
+      },
+      {
+        "field": "for",
+        "question": {
+          "en": "Who you are asking for help for?",
+          "uk": "Для кого потрібна допомога?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What's your request?",
+          "uk": "Яка потрібна допомога?"
+        }
+      }
+    ]
+  },
+  "public_figure": {
+    "id": "public_figure",
+    "icon": "🕺",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "location",
+        "question": {
+          "en": "Where are you located?",
+          "uk": "Де ви знаходитесь?"
+        }
+      },
+      {
+        "field": "contact",
+        "question": {
+          "en": "How can we contact you?",
+          "uk": "Як з вами зв'язатись?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What you provide/request?",
+          "uk": "Що пропонуєте/шукаєте?"
+        }
+      }
+    ]
+  },
+  "journalist": {
+    "id": "journalist",
+    "icon": "📝",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "organization",
+        "question": {
+          "en": "What's the name of your organization?",
+          "uk": "Як називається ваша організація?"
+        }
+      },
+      {
+        "field": "contact",
+        "question": {
+          "en": "How can we contact you?",
+          "uk": "Як з вами зв'язатись?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What you provide/request?",
+          "uk": "Що пропонуєте/шукаєте?"
+        }
+      }
+    ]
+  },
+  "anonymous": {
+    "id": "anonymous",
+    "icon": "🌚",
+    "isFinalSequence": true,
+    "questionSequence": [
+      {
+        "field": "name",
+        "question": {
+          "en": "What's your name?",
+          "uk": "Як вас звуть?"
+        }
+      },
+      {
+        "field": "location",
+        "question": {
+          "en": "Where are you located?",
+          "uk": "Де ви знаходитесь?"
+        }
+      },
+      {
+        "field": "contact",
+        "question": {
+          "en": "How can we contact you?",
+          "uk": "Як з вами зв'язатись?"
+        }
+      },
+      {
+        "field": "deadline",
+        "question": {
+          "en": "What's the deadline?",
+          "uk": "Коли дедлайн?"
+        }
+      },
+      {
+        "field": "request",
+        "question": {
+          "en": "What you provide/request?",
+          "uk": "Що пропонуєте/шукаєте?"
+        }
+      }
+    ]
+  }
+}
